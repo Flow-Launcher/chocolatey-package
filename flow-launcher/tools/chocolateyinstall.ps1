@@ -2,10 +2,6 @@ $ErrorActionPreference = 'Stop';
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $url64bit   = 'https://github.com/Flow-Launcher/Flow.Launcher/releases/download/v1.9.0/Flow-Launcher-Setup.exe' 
 
-if (![Environment]::Is64BitOperatingSystem) {
-    throw "This package requires 64 bit OS architecture."
-}
-
 $packageArgs = @{
   packageName     = $env:ChocolateyPackageName
   unzipLocation   = $toolsDir
