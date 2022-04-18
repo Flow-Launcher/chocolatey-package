@@ -9,7 +9,8 @@
     <packageSourceUrl>https://github.com/Flow-Launcher/chocolatey-package</packageSourceUrl>
     <iconUrl>https://raw.githubusercontent.com/Flow-Launcher/Flow.Launcher/dev/Flow.Launcher/Images/app.png</iconUrl>
     <licenseUrl>https://github.com/Flow-Launcher/Flow.Launcher/blob/dev/LICENSE</licenseUrl>
-    <description>Quick file search and app launcher for Windows with community-made plugins</description>
+    <summary>Quick file search and app launcher for Windows with community-made plugins</summary>
+	<description>Dedicated to making your workflow flow more seamless. Search everything from applications, files, bookmarks, YouTube, Twitter and more. Flow will continue to evolve, designed to be open and built with the community at heart.</description>
     <releaseNotes>https://github.com/Flow-Launcher/Flow.Launcher/releases</releaseNotes>
     <docsUrl>https://www.flowlauncher.com/docs</docsUrl>
     <tags>launcher productivity search plugins</tags>

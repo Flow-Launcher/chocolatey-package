@@ -5,7 +5,7 @@ $releases = 'https://github.com/Flow-Launcher/Flow.Launcher/releases'
 function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1' = @{
-            "(^[$]url\s*=\s*)('.*')"      = "`$1'$($Latest.URL64)'"
+            "(^[$]url64bit\s*=\s*)('.*')"      = "`$1'$($Latest.URL64)'"
             "(?i)(^\s*checksum64\s*=\s*)('.*')" = "`$1'$($Latest.Checksum64)'"
         }
      }
