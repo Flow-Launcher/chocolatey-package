@@ -20,5 +20,6 @@ jobs:
       - name: Check for new update
         shell: pwsh
         run: |
+          choco
           cd .\flow-launcher\
           .\update.ps1
