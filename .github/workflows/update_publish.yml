@@ -1,0 +1,18 @@
+name: Update And Publish Chocolatey Package
+on: push
+
+jobs:
+  check-update:
+    name: Check update
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - name: Install AU
+        shell: pwsh
+        run: Install-Module au
+      - name: Check for new update
+        shell: pwsh
+        run: |
+          cd .\flow-launcher\
+          .\update.ps1
