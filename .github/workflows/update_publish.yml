@@ -11,6 +11,7 @@ jobs:
       - name: Install AU
         shell: pwsh
         run: |
+          $host.Version -ge '5.0'
           Install-Module au -Force
           [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
       - name: Check for new update
