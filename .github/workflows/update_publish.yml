@@ -11,6 +11,7 @@ jobs:
       - name: Choco install
         uses: crazy-max/ghaction-chocolatey@v1
       - name: Install AU
+        shell: pwsh
         run: |
           $host.Version -ge '5.0'
           Install-Module au -Force
