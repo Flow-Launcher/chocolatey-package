@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v3
       - name: Install AU
         shell: pwsh
-        run: Install-Module au
+        run: Install-Module au -y
       - name: Check for new update
         shell: pwsh
         run: |
