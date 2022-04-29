@@ -17,4 +17,9 @@ jobs:
         run: |
           cd .\flow-launcher\
           .\update.ps1
+      - name: Commit update
+        shell: pwsh
+        run: |
           git diff
+          git status
+         
