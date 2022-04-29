@@ -10,7 +10,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Install AU
         shell: pwsh
-        run: Install-Module au -Force
+        run: |
+          Install-Module au -Force
+          Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
       - name: Check for new update
         shell: pwsh
         run: |
