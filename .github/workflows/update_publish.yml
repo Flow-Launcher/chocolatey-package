@@ -11,7 +11,7 @@ jobs:
       - name: Choco install
         uses: crazy-max/ghaction-chocolatey@v1
         with:
-          args: au
+          args: install au
       - name: Install AU
         shell: pwsh
         run: |
