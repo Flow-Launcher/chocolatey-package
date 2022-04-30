@@ -5,7 +5,7 @@ on:
   schedule:
     - cron: "0 9 * * *"
   push:
-    # branches: [ main ]
+    branches: [ main ]
 
 jobs:
   check-update:
@@ -32,9 +32,9 @@ jobs:
           if ($LastExitCode -eq 1)
           {
             echo "`nNew update exists"
-            # echo "`nPublishing new update to Chocolatey"
-            # $package = Get-ChildItem -Path .\ -Filter *.nupkg -File -Name
-            # choco push $package --api-key --source https://push.chocolatey.org/
+            echo "`nPublishing new update to Chocolatey"
+            $package = Get-ChildItem -Path .\ -Filter *.nupkg -File -Name
+            choco push $package --api-key --source https://push.chocolatey.org/
             
             echo "`nCommiting to Git"
             git config --global user.email "choco_package_updater@flowlauncher.com"
@@ -47,4 +47,4 @@ jobs:
           {
             echo "`nNo new updates"
           }
-         
+          
