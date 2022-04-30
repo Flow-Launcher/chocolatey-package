@@ -1,5 +1,10 @@
 name: Update And Publish Chocolatey Package
-on: push
+
+on: 
+  push
+  workflow_dispatch:
+  schedule:
+    - cron: "0 */3 * * *"
 
 jobs:
   check-update:
@@ -33,8 +38,8 @@ jobs:
             echo "`nCommiting to Git"
             git config --global user.email "choco_package_updater@flowlauncher.com"
             git config --global user.name "choco_package_updater"
-            git add .\flow-launcher.nuspec
-            git add .\tools\chocolateyinstall.ps1
+            git add flow-launcher\flow-launcher.nuspec
+            git add flow-launcher\tools\chocolateyinstall.ps1
             git commit -m 'new chocolatey package update'
             git push
           }elseif ($LastExitCode -eq 0)
