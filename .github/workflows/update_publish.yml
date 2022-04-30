@@ -19,16 +19,22 @@ jobs:
         run: |
           cd .\flow-launcher\
           .\update.ps1
-      - name: Commit & publish new update
+      - name: Publish & commit new update
         shell: pwsh
         run: |
           git diff --exit-code
           if ($LastExitCode -eq 1)
           {
             echo "`nNew update exists"
+            # echo "`nPublishing new update to Chocolatey"
+            # $package = Get-ChildItem -Path .\ -Filter *.nupkg -File -Name
+            # choco push $package --api-key --source https://push.chocolatey.org/
+            
+            echo "`nCommiting to Git"
             git config --global user.email "choco_package_updater@flowlauncher.com"
             git config --global user.name "choco_package_updater"
-            git add .
+            git add .\flow-launcher.nuspec
+            git add .\tools\chocolateyinstall.ps1
             git commit -m 'new chocolatey package update'
             git push
           }elseif ($LastExitCode -eq 0)
