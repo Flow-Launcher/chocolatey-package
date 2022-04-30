@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.UPDATER }}
       - name: Install au
         uses: crazy-max/ghaction-chocolatey@v1
         with:
@@ -17,9 +19,20 @@ jobs:
         run: |
           cd .\flow-launcher\
           .\update.ps1
-      - name: Commit update
+      - name: Commit & publish new update
         shell: pwsh
         run: |
-          git diff
-          git status
+          git diff --exit-code
+          if ($LastExitCode -eq 1)
+          {
+            echo "`nNew update exists"
+            git config --global user.email "choco_package_updater@flowlauncher.com"
+            git config --global user.name "choco_package_updater"
+            git add .
+            git commit -m 'new chocolatey package update'
+            git push
+          }elseif ($LastExitCode -eq 0)
+          {
+            echo "`nNo new updates"
+          }
          
