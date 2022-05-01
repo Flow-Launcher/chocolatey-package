@@ -1,11 +1,8 @@
 name: Update And Publish Chocolatey Package
-
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 9 * * *"
-  push:
-    branches: [ main ]
 
 jobs:
   check-update:
@@ -17,34 +14,36 @@ jobs:
         with:
           token: ${{ secrets.UPDATER }}
       - name: Install au
-        uses: crazy-max/ghaction-chocolatey@v1
-        with:
-          args: install au
+        shell: pwsh
+        run: Install-Module au -Force
       - name: Check for new update
         shell: pwsh
         run: |
           cd .\flow-launcher\
           .\update.ps1
       - name: Publish & commit new update
+        env: 
+          API_KEY: ${{ secrets.PUBLISH }}
         shell: pwsh
         run: |
           git diff --exit-code
           if ($LastExitCode -eq 1)
           {
+            cd .\flow-launcher\
+            
             echo "`nNew update exists"
+            
             echo "`nPublishing new update to Chocolatey"
-            $package = Get-ChildItem -Path .\ -Filter *.nupkg -File -Name
-            choco push $package --api-key --source https://push.chocolatey.org/
+            Push-Package
             
             echo "`nCommiting to Git"
             git config --global user.email "choco_package_updater@flowlauncher.com"
             git config --global user.name "choco_package_updater"
-            git add flow-launcher\flow-launcher.nuspec
-            git add flow-launcher\tools\chocolateyinstall.ps1
+            git add .\flow-launcher.nuspec
+            git add .\tools\chocolateyinstall.ps1
             git commit -m 'new chocolatey package update'
             git push
           }elseif ($LastExitCode -eq 0)
           {
             echo "`nNo new updates"
           }
-          
