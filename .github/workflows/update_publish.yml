@@ -22,20 +22,21 @@ jobs:
           cd .\flow-launcher\
           .\update.ps1
       - name: Publish & commit new update
-        env: 
+        env:
           API_KEY: ${{ secrets.PUBLISH }}
         shell: pwsh
         run: |
+          $ErrorActionPreference = "Stop"
           git diff --exit-code
           if ($LastExitCode -eq 1)
           {
             cd .\flow-launcher\
-            
+
             echo "`nNew update exists"
-            
+
             echo "`nPublishing new update to Chocolatey"
             Push-Package
-            
+
             echo "`nCommiting to Git"
             git config --global user.email "choco_package_updater@flowlauncher.com"
             git config --global user.name "choco_package_updater"
