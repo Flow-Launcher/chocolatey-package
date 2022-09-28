@@ -1,7 +1,5 @@
 import-module au
 
-$releases = 'https://github.com/Flow-Launcher/Flow.Launcher/releases'
-
 function global:au_SearchReplace {
     @{
         'tools\chocolateyInstall.ps1' = @{
@@ -12,12 +10,13 @@ function global:au_SearchReplace {
 }
 
 function global:au_GetLatest {
-    $downloadPage = Invoke-WebRequest -Uri $releases
+    $downloadPage = Invoke-WebRequest -Uri 'https://api.github.com/repos/flow-launcher/flow.launcher/releases/latest'
 
-    $url = $downloadPage.Links | ? href -match '\.exe$' | % href | select -First 1
-	$url = 'https://github.com' + $url
-	
-    $version = ($url -split '/' | select -Last 1 -Skip 1).Substring(1)
+    $downloadPage.Content -match 'tag_name":"v(.*)","target'
+
+    $version = $Matches[1]
+
+    $url = 'https://github.com/Flow-Launcher/Flow.Launcher/releases/download/v' + $version + '/Flow-Launcher-Setup.exe'
 
     $Latest = @{ URL64 = $url; Version = $version }
 
