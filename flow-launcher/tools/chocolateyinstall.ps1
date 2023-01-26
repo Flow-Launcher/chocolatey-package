@@ -1,6 +1,6 @@
 ﻿$ErrorActionPreference = 'Stop'; 
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
-$url64bit   = 'https://github.com/Flow-Launcher/Flow.Launcher/releases/download/v1.11.0/Flow-Launcher-Setup.exe' 
+$url64bit   = 'https://github.com/Flow-Launcher/Flow.Launcher/releases/download/v1.12.1/Flow-Launcher-Setup.exe' 
 
 If (Test-Path $env:LOCALAPPDATA\FlowLauncher\Flow.Launcher.exe){
 	$version = [System.Diagnostics.FileVersionInfo]::GetVersionInfo("$env:LocalAppData\FlowLauncher\Flow.Launcher.exe").FileVersion
@@ -15,7 +15,7 @@ $packageArgs = @{
   fileType        = 'exe' 
   url64bit        = $url64bit
   softwareName    = 'Flow-Launcher*'   
-  checksum64      = 'ef4d6290e1861438db9b400a4e97be3aa08cc4da699f1762960e5e8bd48c28e4'
+  checksum64      = 'c00e02203f15381b55adb46e44e57e4ea00990f25d4b9425e5bb1d6650133883'
   checksumType64  = 'sha256'
   silentArgs      = "/qn /norestart /l*v `"$($env:TEMP)\$($packageName).$($env:chocolateyPackageVersion).MsiInstall.log`"" 
   validExitCodes  = @(0, 3010, 1641)
