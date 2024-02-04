@@ -31,6 +31,10 @@ jobs:
           if ($LastExitCode -eq 1)
           {
             cd .\flow-launcher\
+            
+            dir
+            
+            pwd
 
             echo "`nNew update exists"
 
