@@ -56,5 +56,3 @@ jobs:
           {
             echo "`nNo new updates"
           }
-      - name: Keep cron job alive during inactivity
-        uses: gautamkrishnar/keepalive-workflow@v1
