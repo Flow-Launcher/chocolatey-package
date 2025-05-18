@@ -1,8 +1,8 @@
 name: Update And Publish Chocolatey Package
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 9 * * *"
+  repository_dispatch:
+    types: [publish]
 
 jobs:
   check-update:
