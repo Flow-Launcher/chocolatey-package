@@ -5,8 +5,8 @@ on:
     types: [publish]
 
 jobs:
-  check-update:
-    name: Check update
+  update-publish:
+    name: Update And Publish Chocolatey Package
     runs-on: windows-latest
     steps:
       - name: Check out repository code
